@@ -320,7 +320,7 @@ esp_err_t AC101::WriteReg(uint8_t reg, uint16_t val)
     ret |= i2c_master_write_byte(cmd, reg, ACK_CHECK_EN);
     ret |= i2c_master_write(cmd, buf, 2, ACK_CHECK_EN);
     ret |= i2c_master_stop(cmd);
-    ret |= i2c_master_cmd_begin((i2c_port_t) I2C_MASTER_NUM, cmd, 1000 / portTICK_RATE_MS);
+    ret |= i2c_master_cmd_begin((i2c_port_t) I2C_MASTER_NUM, cmd, 1000 / portTICK_PERIOD_MS);
     i2c_cmd_link_delete(cmd);
     return ret;
 }
@@ -359,7 +359,7 @@ esp_err_t AC101::ReadReg_Full(uint8_t reg, uint8_t* data_rd, size_t size)
     }
     ret |= i2c_master_read_byte(cmd, data_rd + size - 1, NACK_VAL);
     ret |= i2c_master_stop(cmd);
-    ret |= i2c_master_cmd_begin((i2c_port_t) I2C_MASTER_NUM, cmd, 1000 / portTICK_RATE_MS);
+    ret |= i2c_master_cmd_begin((i2c_port_t) I2C_MASTER_NUM, cmd, 1000 / portTICK_PERIOD_MS);
     i2c_cmd_link_delete(cmd);
     return ret;
 }

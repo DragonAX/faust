@@ -92,7 +92,7 @@ uint8_t MPU9250::i2cRead(uint8_t Address, uint8_t Register, uint8_t Nbytes, uint
     }
     i2c_master_read_byte(cmd, Data + Nbytes - 1, NACK_VAL);
     i2c_master_stop(cmd);
-    esp_err_t ret = i2c_master_cmd_begin(I2C_MASTER_NUM, cmd, 1000 / portTICK_RATE_MS);
+    esp_err_t ret = i2c_master_cmd_begin(I2C_MASTER_NUM, cmd, 1000 / portTICK_PERIOD_MS);
     i2c_cmd_link_delete(cmd);
     return ret;
 }
@@ -108,7 +108,7 @@ uint8_t MPU9250::i2cWriteByte(uint8_t Address, uint8_t Register, uint8_t Data)
     // write the data. doesn't include a size declaration, hopefully its not needed
     i2c_master_write(cmd, &Data, ACK_CHECK_EN, sizeof(Data));
     i2c_master_stop(cmd);
-    esp_err_t ret = i2c_master_cmd_begin(I2C_MASTER_NUM, cmd, 1000 / portTICK_RATE_MS);
+    esp_err_t ret = i2c_master_cmd_begin(I2C_MASTER_NUM, cmd, 1000 / portTICK_PERIOD_MS);
     i2c_cmd_link_delete(cmd);
     return ret;
 }
