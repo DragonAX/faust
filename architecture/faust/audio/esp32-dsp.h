@@ -36,7 +36,7 @@
 
 #define MULT_S32 2147483647
 #define DIV_S32 4.6566129e-10
-#define clip(sample) std::max(-MULT_S32, std::min(MULT_S32, ((int32_t)(sample * MULT_S32))));
+#define clip(sample) std::max(-(int32_t)MULT_S32, std::min((int32_t)MULT_S32, ((int32_t)(sample * MULT_S32))));
 
 #define AUDIO_MAX_CHAN 2
 
